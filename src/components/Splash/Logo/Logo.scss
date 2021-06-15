@@ -1,0 +1,53 @@
+.logoWrapper {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .dot {
+        $size: 15px;
+
+        position: relative;
+        padding: $size;
+        border-radius: $size;
+        margin: 0 $size/3;
+        background-color: #FFF;
+
+        animation: anim 1.5s infinite ease-in-out;
+
+        &:first-of-type {
+            background-color: rgb(62, 144, 226);
+            animation-delay: .15s;
+        }
+
+        &:last-of-type {
+            background-color: #366;
+            animation-delay: -.15s;
+        }
+
+        @keyframes anim {
+            0% {
+                left: -60px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0;
+            }
+            40% {
+                left: 0;
+                opacity: 1;
+            }
+            60% {
+                left: 0;
+                opacity: 1;
+            }
+            90% {
+                opacity: 0;
+            }
+            100% {
+                left: 60px;
+                opacity: 0;
+            }
+        }
+    }
+}
