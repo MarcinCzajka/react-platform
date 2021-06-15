@@ -13,7 +13,7 @@
         margin: 0 $size/3;
         background-color: #FFF;
 
-        animation: anim 1.5s infinite ease-in-out;
+        animation: anim 1.7s infinite ease-in-out;
 
         &:first-of-type {
             background-color: rgb(62, 144, 226);
@@ -34,14 +34,17 @@
                 opacity: 0;
             }
             40% {
+                padding: 10px;
                 left: 0;
                 opacity: 1;
             }
             60% {
+                padding: 15px;
                 left: 0;
                 opacity: 1;
             }
             90% {
+                padding: 1px;
                 opacity: 0;
             }
             100% {
