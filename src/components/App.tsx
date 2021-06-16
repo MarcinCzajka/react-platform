@@ -43,12 +43,12 @@ class App extends React.Component<{}, AppState> {
   }
 
   componentDidMount() {
-    setTimeout(() => {login().then(data => {
+    login().then(data => {
       this.handleLogin({loggedIn: true, ...data as object})
     }).catch(error => {
       //Still have to write some login in the case of failed login
       //Probbably the best i can do is to show connection error message
-    })}, 1000)
+    })
   }
 
   render() {
