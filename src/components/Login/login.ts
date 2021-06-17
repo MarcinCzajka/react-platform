@@ -45,7 +45,7 @@ const login = (username?: string, password?: string) => {
                 resolve(data)
             }
         }).catch(error => {
-            reject(error.response.data);
+            reject(error);
         });
     })
 }

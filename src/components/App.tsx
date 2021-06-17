@@ -10,10 +10,10 @@ import './App.scss';
 
 type AppState = {
   loading: boolean;
+  loggedIn: boolean;
 }
 
 type SessionContextType = {
-  loggedIn: boolean;
   userName?: string;
   fullName? : string;
   userId?: string;
@@ -23,28 +23,27 @@ type SessionContextType = {
 class App extends React.Component<{}, AppState> {
   
   state: AppState = {
-    loading: true
-  }
-
-  sessionContext: SessionContextType = {
+    loading: true,
     loggedIn: false
   }
 
-  onAppLoaded = () => {
+  sessionContext: SessionContextType = {
+
+  }
+
+  hideSplash = () => {
     this.setState({
       loading: false
     })
   }
 
-  handleLogin(data: SessionContextType): void {
-    this.sessionContext = data;
-
-    this.onAppLoaded();
-  }
-
   componentDidMount() {
     login().then(data => {
-      this.handleLogin({loggedIn: true, ...data as object})
+      this.sessionContext = data as SessionContextType;
+
+      this.setState({
+        loggedIn: true
+      })
     }).catch(error => {
       //Still have to write some login in the case of failed login
       //Probbably the best i can do is to show connection error message
@@ -82,7 +81,9 @@ class App extends React.Component<{}, AppState> {
             <Route 
               exact
               path='/'
-              component={MainView}
+              render={props => (
+                <MainView {...props} onReady={this.hideSplash} />
+              )}
             />
 
           </Switch>
