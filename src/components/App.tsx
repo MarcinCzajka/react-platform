@@ -37,6 +37,12 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
+  showSplash = () => {
+    this.setState({
+      loading: true
+    })
+  }
+
   componentDidMount() {
     login().then(data => {
       this.sessionContext = data as SessionContextType;
@@ -82,7 +88,7 @@ class App extends React.Component<{}, AppState> {
               exact
               path='/'
               render={props => (
-                <MainView {...props} onReady={this.hideSplash} />
+                <MainView {...props} onReady={this.hideSplash} showSplash={this.showSplash} />
               )}
             />
 

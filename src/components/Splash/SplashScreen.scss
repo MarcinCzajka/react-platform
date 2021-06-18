@@ -1,8 +1,11 @@
+@import '../colors';
+
 .splashScreen {
-    background-color: rgb(49, 34, 63);
+    background-color: $primary-color;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 1000;
 }

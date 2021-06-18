@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 
-/src/apiConfig.js
+/src/api/apiConfig.js

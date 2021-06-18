@@ -1,0 +1,9 @@
+@import '../colors';
+
+.mainView {
+    overflow: hidden;
+
+    &.modalActive {
+        height: 100vh;
+    }
+}

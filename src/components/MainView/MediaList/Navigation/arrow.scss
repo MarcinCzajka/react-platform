@@ -1,0 +1,29 @@
+$size: 20px;
+$sizeLarge: 25px;
+
+.arrow {
+    position: absolute;
+    cursor: pointer;
+    border: solid #EFE;
+    width: $size;
+    height: $size;
+    border-width: 0 5px 5px 0;
+    top: calc(50% - #{$size});
+    z-index: 5;
+
+    &:hover {
+        width: $sizeLarge;
+        height: $sizeLarge;
+        top: calc(50% - #{$sizeLarge});
+    }
+
+    &.left {
+        left: 50px;
+        transform: rotate(135deg);
+    }
+
+    &.right {
+        right: 50px;
+        transform: rotate(-45deg);
+    }
+}

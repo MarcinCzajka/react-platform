@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { basePath } from '../apiConfig';
+import { basePath } from './apiConfig';
 
 export default axios.create({
 	baseURL: basePath,

@@ -1,4 +1,8 @@
-html, body {
+@import './colors';
+
+html,
+body {
+    background-color: $primary-color;
     font-size: 16px;
     margin: 0;
     padding: 0;
@@ -12,4 +16,8 @@ html, body {
         transition: opacity .25s linear;
         opacity: 0;
     }
+}
+
+.hidden {
+    display: none !important;
 }

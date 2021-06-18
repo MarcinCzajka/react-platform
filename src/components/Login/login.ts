@@ -1,5 +1,5 @@
 import basePath from '../../api/basePath';
-import { loginPath } from '../../apiConfig';
+import { loginPath } from '../../api/apiConfig';
 
 interface loginDataInterface {
     userId: string,

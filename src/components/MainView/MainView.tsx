@@ -1,7 +1,8 @@
 import React from 'react';
 import SessionContext from '../../contexts/SessionContext';
-import { getMediaList } from './mediaListApi';
+import { getMediaList, getMedia } from './mediaListApi';
 import MediaList from './MediaList/MediaList';
+import PlayerModal from './PlayerModal/PlayerModal';
 import './MainView.scss';
 
 type MyState = {
@@ -9,13 +10,16 @@ type MyState = {
     triedToFetch: boolean;
     listsToFetch: number[];
     mediaLists: any[];
+    displayMediaUrl?: any;
+    displayMediaPoster?: string;
 }
 
 type MyProps = {
-    onReady: () => void
+    onReady: () => void;
+    showSplash: () => void;
 }
 
-class MainView extends React.Component<MyProps, MyState> {
+class MainView extends React.PureComponent<MyProps, MyState> {
 
     constructor(props: MyProps) {
         super(props);
@@ -30,11 +34,32 @@ class MainView extends React.Component<MyProps, MyState> {
         //Allow use of context outside of render function
         //stackoverflow.com/questions/49809884/access-react-context-outside-of-render-function
         MainView.contextType = SessionContext;
+
+        this.displayMedia = this.displayMedia.bind(this);
+        this.hideModal = this.hideModal.bind(this);
     }
 
     componentDidUpdate() {
         //wait for bearer token to apper on context to fetch Media
         if (!this.state.triedToFetch && this.context?.token) this.fetchMediaList();
+    }
+
+    displayMedia(Id: number, poster = '') {
+        this.props.showSplash();
+
+        getMedia(this.context.token, Id, 'TRIAL').then(ContentUrl => {
+            console.log(ContentUrl)
+            this.setState({
+                displayMediaUrl: ContentUrl,
+                displayMediaPoster: poster
+            })
+        }).catch(err => {
+            
+        }).finally(() => {
+
+            this.props.onReady();
+
+        })
     }
 
     fetchMediaList() {
@@ -76,12 +101,27 @@ class MainView extends React.Component<MyProps, MyState> {
         callback();
     }
 
+    hideModal() {
+        this.setState({
+            displayMediaUrl: '',
+            displayMediaPoster: ''
+        })
+    }
+
     render() {
-        const listsToRender = this.state.mediaLists;
+        const { mediaLists, displayMediaUrl, displayMediaPoster } = this.state;
 
         return (
-            <section className="mainView">
-                {listsToRender.map((entities, index) => <MediaList key={index} listTitle={entities.title} entities={entities.data} /> )}
+            <section className={`mainView ${displayMediaUrl ? 'modalActive' : ''}`}>
+                {displayMediaUrl ? <PlayerModal src={displayMediaUrl} poster={displayMediaPoster || ''} close={this.hideModal} /> : ""}
+                {mediaLists.map((entities, index) => (
+                    <MediaList 
+                        key={index}
+                        listTitle={entities.title}
+                        entities={entities.data}
+                        displayMedia={this.displayMedia}
+                    />
+                ))}
             </section>
         )
     }

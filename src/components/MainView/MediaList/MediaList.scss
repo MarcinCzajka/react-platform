@@ -1,0 +1,32 @@
+@import '../../colors';
+
+.mediaListContainer {
+    position: relative;
+    background-color: $primary-color;
+    margin: 0;
+    border-radius: 10px;
+    width: 98vw;
+    color: #ccc;
+    padding: .5em;
+
+    &:first-child {
+        margin-top: 2em;
+    }
+
+    &:last-child {
+        margin-bottom: 2em;
+    }
+
+    .listTitle {
+        padding: .5em 0;
+        margin: 0 0 0 1.5em;
+    }
+
+    .mediaList {
+        position: relative;
+        display: flex;
+        overflow: visible;
+        margin: 0 0 1em 2em;
+        transition: left .5s ease-in-out;
+    }
+}
